@@ -1,1 +1,1 @@
-export { useTaskManager } from './useTaskManager'
+export { useTaskManager } from "./useTaskManager";

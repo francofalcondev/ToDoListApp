@@ -1,31 +1,25 @@
-import React from "react";
-import { View } from "react-native"
-import { FloatingButtonAdd,TaskList } from "./components";
+import React, { useState } from "react";
+import { View, Text } from "react-native";
+import { FloatingButtonAdd, ModalAddTask, TaskList } from "./components";
 import { styles } from "./styles";
 import { useTaskManager } from "./hooks";
 
+const Home = () => {
+  const { tasks } = useTaskManager();
+  const [isVisible, setIsVisible] = useState(false);
 
-const Home  = () => {
-    
-    const {tasks} = useTaskManager()
+  const handlePress = () => {
+    setIsVisible((prev) => !prev);
+  };
 
-    const handlePress = () => {
-        console.log("se presiono")
-    }
-
-
-
-
-
-
-    return (
-        
-        <View style={styles.container}>
-            <TaskList task={tasks}/>
-            <FloatingButtonAdd onPress={handlePress}/>
-        </View>
-    );
+  return (
+    <View style={styles.container}>
+      <Text style={styles.titleHome}>Todo List</Text>
+      <TaskList task={tasks} />
+      <FloatingButtonAdd onPress={handlePress} />
+      <ModalAddTask isVisible={isVisible} setIsVisible={setIsVisible} />
+    </View>
+  );
 };
-
 
 export default Home;

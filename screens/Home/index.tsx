@@ -1,5 +1,5 @@
 import React from "react";
-import { View } from "react-native"
+import { View,Text } from "react-native"
 import { FloatingButtonAdd,TaskList } from "./components";
 import { styles } from "./styles";
 import { useTaskManager } from "./hooks";
@@ -21,6 +21,7 @@ const Home  = () => {
     return (
         
         <View style={styles.container}>
+            <Text style={styles.titleHome}>Todo List</Text>
             <TaskList task={tasks}/>
             <FloatingButtonAdd onPress={handlePress}/>
         </View>

@@ -6,18 +6,19 @@ import { useTaskManager } from "./hooks";
 
 const Home = () => {
   const { tasks } = useTaskManager();
-  const [isVisible, setIsVisible] = useState(false);
-
-  const handlePress = () => {
-    setIsVisible((prev) => !prev);
-  };
+  const [isModalAddTaskOpen, setIsModalAddTaskOpen] = useState<boolean>(false);
 
   return (
     <View style={styles.container}>
       <Text style={styles.titleHome}>Todo List</Text>
       <TaskList task={tasks} />
-      <FloatingButtonAdd onPress={handlePress} />
-      <ModalAddTask isVisible={isVisible} setIsVisible={setIsVisible} />
+      <FloatingButtonAdd
+        onPress={() => setIsModalAddTaskOpen((prev) => !prev)}
+      />
+      <ModalAddTask
+        isModalAddTaskOpen={isModalAddTaskOpen}
+        setIsModalAddTaskOpen={setIsModalAddTaskOpen}
+      />
     </View>
   );
 };

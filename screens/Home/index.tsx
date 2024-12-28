@@ -2,12 +2,11 @@ import React, { useState } from "react";
 import { View, Text } from "react-native";
 import { FloatingButtonAdd, ModalAddTask, TaskList } from "./components";
 import { styles } from "./styles";
-import { useTaskManager } from "./hooks";
+import { useTaskContext } from "@/context";
 
 const Home = () => {
-  const { tasks } = useTaskManager();
   const [isModalAddTaskOpen, setIsModalAddTaskOpen] = useState<boolean>(false);
-
+  const { tasks } = useTaskContext();
   return (
     <View style={styles.container}>
       <Text style={styles.titleHome}>Todo List</Text>

@@ -30,5 +30,24 @@ export const styles = StyleSheet.create({
     borderColor: "red",
   },
 
-  buttonAddTask: {},
+  containerTextInput: {
+    position: "relative",
+  },
+
+  buttonAddTask: {
+    position: "absolute",
+    backgroundColor: "gray",
+    borderRadius: 32,
+    justifyContent: "center",
+    alignItems: "center",
+    bottom: 0,
+    top: 30,
+    right: 0,
+    width: 65,
+    height: 65,
+    shadowColor: "#000",
+    shadowOffset: { width: 1, height: 3 },
+    shadowOpacity: 0.2,
+    shadowRadius: 3.56,
+  },
 });

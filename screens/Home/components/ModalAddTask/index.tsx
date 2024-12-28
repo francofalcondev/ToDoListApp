@@ -11,7 +11,12 @@ import {
 import { styles } from "./styles";
 import { ModalAddTaskProps } from "./types";
 import { useEffect, useRef, useState } from "react";
-const ModalAddTask = ({ isVisible, setIsVisible }: ModalAddTaskProps) => {
+import { CheckCheck } from "lucide-react-native";
+
+const ModalAddTask = ({
+  isModalAddTaskOpen,
+  setIsModalAddTaskOpen,
+}: ModalAddTaskProps) => {
   const [isFocused, setIsFocused] = useState<boolean>(false);
   const textInputRef = useRef<any>(null);
 
@@ -22,16 +27,16 @@ const ModalAddTask = ({ isVisible, setIsVisible }: ModalAddTaskProps) => {
   };
 
   useEffect(() => {
-    if (isVisible) {
+    if (isModalAddTaskOpen) {
       Keyboard.dismiss();
       Keyboard.isVisible();
     }
-  }, [isVisible]);
+  }, [isModalAddTaskOpen]);
 
   return (
     <Modal
       transparent={true}
-      visible={isVisible}
+      visible={isModalAddTaskOpen}
       animationType="slide"
       onShow={onModalShow}
     >
@@ -40,18 +45,24 @@ const ModalAddTask = ({ isVisible, setIsVisible }: ModalAddTaskProps) => {
         style={styles.overlay}
       >
         <View style={styles.modalContainer}>
-          <TextInput
-            style={[
-              styles.inputAddTask,
-              isFocused && styles.inputAddTaskFocused,
-            ]}
-            ref={textInputRef}
-            onFocus={() => setIsFocused(true)}
-            onBlur={() => setIsFocused(false)}
-            autoFocus={true}
-            placeholder="Input new task here"
-          />
-          <Pressable onPress={() => setIsVisible(false)}>
+          <View style={styles.containerTextInput}>
+            <TextInput
+              style={[
+                styles.inputAddTask,
+                isFocused && styles.inputAddTaskFocused,
+              ]}
+              ref={textInputRef}
+              onFocus={() => setIsFocused(true)}
+              onBlur={() => setIsFocused(false)}
+              autoFocus={true}
+              placeholder="Input new task here"
+            />
+            <Pressable style={styles.buttonAddTask}>
+              <CheckCheck color="#ffff" />
+            </Pressable>
+          </View>
+
+          <Pressable onPress={() => setIsModalAddTaskOpen(false)}>
             <Text>X</Text>
           </Pressable>
         </View>

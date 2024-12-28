@@ -1,6 +1,6 @@
 import { Dispatch, SetStateAction } from "react";
 
 export interface ModalAddTaskProps {
-  isVisible: boolean;
-  setIsVisible: Dispatch<SetStateAction<boolean>>;
+  isModalAddTaskOpen: boolean;
+  setIsModalAddTaskOpen: Dispatch<SetStateAction<boolean>>;
 }

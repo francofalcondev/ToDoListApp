@@ -50,4 +50,7 @@ export const styles = StyleSheet.create({
     shadowOpacity: 0.2,
     shadowRadius: 3.56,
   },
+  buttonAddTaskEnabled: {
+    backgroundColor: "#007AFF",
+  },
 });

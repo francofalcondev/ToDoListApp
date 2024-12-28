@@ -5,8 +5,7 @@ import {
   View,
   Platform,
   Keyboard,
-  Pressable,
-  Text,
+  TouchableOpacity,
 } from "react-native";
 import { styles } from "./styles";
 import { ModalAddTaskProps } from "./types";
@@ -16,13 +15,25 @@ import { CheckCheck } from "lucide-react-native";
 const ModalAddTask = ({
   isModalAddTaskOpen,
   setIsModalAddTaskOpen,
+  addTask,
 }: ModalAddTaskProps) => {
   const [isFocused, setIsFocused] = useState<boolean>(false);
+  const [newTask, setNewTask] = useState("");
   const textInputRef = useRef<any>(null);
+  const isButtonEnabled: boolean = newTask.length > 2;
 
   const onModalShow = () => {
     if (textInputRef.current) {
       textInputRef.current.focus();
+    }
+  };
+
+  const handleAddTaskInput = (title: string) => {
+    if (!isButtonEnabled) return;
+    if (newTask.trim().length > 3) {
+      addTask(newTask);
+      setNewTask("");
+      setIsModalAddTaskOpen(false);
     }
   };
 
@@ -54,17 +65,21 @@ const ModalAddTask = ({
               ref={textInputRef}
               onFocus={() => setIsFocused(true)}
               onBlur={() => setIsFocused(false)}
+              onChangeText={setNewTask}
               autoFocus={true}
               placeholder="Input new task here"
             />
-            <Pressable style={styles.buttonAddTask}>
+            <TouchableOpacity
+              disabled={!isButtonEnabled}
+              style={[
+                styles.buttonAddTask,
+                isButtonEnabled && styles.buttonAddTaskEnabled,
+              ]}
+              onPress={() => handleAddTaskInput(newTask)}
+            >
               <CheckCheck color="#ffff" />
-            </Pressable>
+            </TouchableOpacity>
           </View>
-
-          <Pressable onPress={() => setIsModalAddTaskOpen(false)}>
-            <Text>X</Text>
-          </Pressable>
         </View>
       </KeyboardAvoidingView>
     </Modal>

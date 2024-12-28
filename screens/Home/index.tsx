@@ -6,7 +6,7 @@ import { useTaskContext } from "@/context";
 
 const Home = () => {
   const [isModalAddTaskOpen, setIsModalAddTaskOpen] = useState<boolean>(false);
-  const { tasks } = useTaskContext();
+  const { tasks, addTask } = useTaskContext();
   return (
     <View style={styles.container}>
       <Text style={styles.titleHome}>Todo List</Text>
@@ -15,6 +15,7 @@ const Home = () => {
         onPress={() => setIsModalAddTaskOpen((prev) => !prev)}
       />
       <ModalAddTask
+        addTask={addTask}
         isModalAddTaskOpen={isModalAddTaskOpen}
         setIsModalAddTaskOpen={setIsModalAddTaskOpen}
       />

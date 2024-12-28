@@ -8,7 +8,7 @@ export const taskMock = [
   {
     id: (Date.now() + 1).toString(),
     title: "Finish React Native project",
-    completed: true,
+    completed: false,
     createdAt: new Date(),
   },
   {
@@ -20,7 +20,7 @@ export const taskMock = [
   {
     id: (Date.now() + 3).toString(),
     title: "Read a book",
-    completed: true,
+    completed: false,
     createdAt: new Date(),
   },
   {

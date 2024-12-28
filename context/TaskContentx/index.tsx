@@ -22,7 +22,9 @@ export const TaskProvider = ({ children }: TaskProviderProps) => {
     setTasks([...tasks, newTask]);
   };
 
-  const deleteTask = (id: string) => {};
+  const deleteTask = (id: string) => {
+    setTasks((tasks) => tasks.filter((task) => task.id !== id));
+  };
 
   return (
     <TaskContext.Provider value={{ tasks, addTask, deleteTask }}>

@@ -7,6 +7,7 @@ import { useTaskContext } from "@/context";
 const Home = () => {
   const [isModalAddTaskOpen, setIsModalAddTaskOpen] = useState<boolean>(false);
   const { tasks, addTask } = useTaskContext();
+
   return (
     <View style={styles.container}>
       <Text style={styles.titleHome}>Todo List</Text>

@@ -34,6 +34,11 @@ export const TaskItem = ({ task }: TaskItemProps) => {
           isChecked={task.completed}
           innerIconStyle={{ borderWidth: 2 }}
           fillColor="gray"
+          onPress={() =>
+            setTimeout(() => {
+              deleteTask(task.id);
+            }, 800)
+          }
           text={task.title}
           textStyle={{ color: "black", fontSize: 20 }}
         />

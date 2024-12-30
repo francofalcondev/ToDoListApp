@@ -3,7 +3,9 @@ import { StyleSheet } from "react-native";
 export const styles = StyleSheet.create({
   containerTaskItemMain: {
     flex: 1,
-    padding: 5,
+    paddingBottom: 12,
+    paddingTop: 12,
+    paddingLeft: 10,
     backgroundColor: "rgba(240, 240, 240, 0.5)",
     borderRadius: 10,
   },

@@ -2,11 +2,11 @@ import React, { useState } from "react";
 import { View, Text } from "react-native";
 import { FloatingButtonAdd, ModalAddTask, TaskList } from "./components";
 import { styles } from "./styles";
-import { useTaskManager } from "./hooks";
+import { useTaskContext } from "@/context";
 
 const Home = () => {
-  const { tasks } = useTaskManager();
   const [isModalAddTaskOpen, setIsModalAddTaskOpen] = useState<boolean>(false);
+  const { tasks, addTask } = useTaskContext();
 
   return (
     <View style={styles.container}>
@@ -16,6 +16,7 @@ const Home = () => {
         onPress={() => setIsModalAddTaskOpen((prev) => !prev)}
       />
       <ModalAddTask
+        addTask={addTask}
         isModalAddTaskOpen={isModalAddTaskOpen}
         setIsModalAddTaskOpen={setIsModalAddTaskOpen}
       />

@@ -1,13 +1,30 @@
 import { createContext, useContext, useState } from "react";
 import { Task, TaskContextType, TaskProviderProps } from "./types";
+import { taskMock } from "@/api/mockData";
 
-const TaskContext = createContext<TaskContextType | undefined>(undefined);
+const TaskContext = createContext<TaskContextType>({
+  tasks: [],
+  addTask: () => {},
+  deleteTask: () => {},
+});
 
 export const TaskProvider = ({ children }: TaskProviderProps) => {
-  const [tasks, setTasks] = useState<Task[]>([]);
+  const [tasks, setTasks] = useState<Task[]>(taskMock);
 
-  const addTask = (title: string) => {};
-  const deleteTask = (id: string) => {};
+  const addTask = (title: string) => {
+    const newTask: Task = {
+      id: Date.now().toString(),
+      title,
+      completed: false,
+      createdAt: new Date(),
+    };
+
+    setTasks([...tasks, newTask]);
+  };
+
+  const deleteTask = (id: string) => {
+    setTasks((tasks) => tasks.filter((task) => task.id !== id));
+  };
 
   return (
     <TaskContext.Provider value={{ tasks, addTask, deleteTask }}>

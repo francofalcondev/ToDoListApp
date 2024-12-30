@@ -1,9 +1,10 @@
+import { Colors } from "@/constants/Colors";
 import { StyleSheet } from "react-native";
 
 export const styles = StyleSheet.create({
   floatingButtonAdd: {
     position: "absolute",
-    backgroundColor: "#007AFF",
+    backgroundColor: Colors.buttonColorPrimary,
     borderRadius: 32,
     justifyContent: "center",
     alignItems: "center",

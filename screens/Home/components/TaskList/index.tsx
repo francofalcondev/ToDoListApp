@@ -1,7 +1,7 @@
 import { FlatList, ListRenderItemInfo, View } from "react-native";
 import { TaskListProps } from "./types";
 import { TaskItem } from "./components";
-import { Task } from "../../types";
+import { ITask } from "@/interfaces";
 import { styles } from "./styles";
 
 const TaskList = ({ task }: TaskListProps) => {
@@ -9,7 +9,7 @@ const TaskList = ({ task }: TaskListProps) => {
     <FlatList
       data={task}
       keyExtractor={(item) => item.id}
-      renderItem={({ item }: ListRenderItemInfo<Task>) => (
+      renderItem={({ item }: ListRenderItemInfo<ITask>) => (
         <TaskItem task={item} />
       )}
       ItemSeparatorComponent={() => <View style={styles.separator} />}

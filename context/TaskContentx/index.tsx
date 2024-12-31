@@ -11,12 +11,23 @@ const TaskContext = createContext<TaskContextType>({
 export const TaskProvider = ({ children }: TaskProviderProps) => {
   const [tasks, setTasks] = useState<Task[]>(taskMock);
 
-  const addTask = (title: string) => {
+  const addTask = (
+    title: string,
+    category: "work" | "personal" | "wishlist" | "sport" | "no category",
+    priority: "low" | "medium" | "high" = "low",
+    description: string = "",
+    dueDate?: Date,
+  ) => {
     const newTask: Task = {
       id: Date.now().toString(),
       title,
+      category,
+      priority,
+      description,
       completed: false,
       createdAt: new Date(),
+      dueDate: dueDate || undefined,
+      archived: false,
     };
 
     setTasks([...tasks, newTask]);

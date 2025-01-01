@@ -24,7 +24,7 @@ export const CategoryTabs = () => {
           <ButtonTab
             title={item.title}
             isSelected={item.id === selectedCategoryTab}
-            handleTabPress={() => handleTabPress(item.id)}
+            onPress={() => handleTabPress(item.id)}
           />
         )}
         keyExtractor={(item) => item.id}

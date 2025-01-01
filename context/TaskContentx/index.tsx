@@ -10,7 +10,9 @@ const TaskContext = createContext<TaskContextType>({
 
 export const TaskProvider = ({ children }: TaskProviderProps) => {
   const [tasks, setTasks] = useState<Task[]>(taskMock);
-
+  const [tasksFiltered, setTaskFiltered] = useState<
+    "all" | "work" | "personal" | "fitnes" | "wishlist"
+  >("all");
   const addTask = (
     title: string,
     category: "work" | "personal" | "wishlist" | "sport" | "no category",

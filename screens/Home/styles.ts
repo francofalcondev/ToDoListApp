@@ -7,9 +7,9 @@ export const styles = StyleSheet.create({
     position: "relative",
   },
   titleHome: {
-    fontSize: 35,
+    fontSize: 27,
     fontWeight: "600",
-    marginBottom: 20,
+    marginBottom: 10,
     marginTop: 20,
   },
 });

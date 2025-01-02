@@ -5,11 +5,14 @@ import { useState } from "react";
 export const CategoryTabs = () => {
   const [selectedCategoryTab, setSelectedCategoryTab] = useState<string>("1");
   const tabs = [
-    { id: "1", title: "Work" },
+    { id: "1", title: "All" },
     { id: "2", title: "Personal" },
-    { id: "3", title: "Wishlist" },
-    { id: "4", title: "Sport" },
-    { id: "5", title: "No Category" },
+    { id: "3", title: "Finance" },
+    { id: "4", title: "Fitness" },
+    { id: "5", title: "Shopping" },
+    { id: "6", title: "Family" },
+    { id: "7", title: "Study" },
+    { id: "8", title: "Work" },
   ];
 
   const handleTabPress = (id: string) => {
@@ -19,6 +22,7 @@ export const CategoryTabs = () => {
   return (
     <View>
       <FlatList
+        showsHorizontalScrollIndicator={false}
         data={tabs}
         renderItem={({ item }) => (
           <ButtonTab

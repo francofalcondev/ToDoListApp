@@ -3,16 +3,16 @@ import { StyleSheet } from "react-native";
 
 export const styles = StyleSheet.create({
   buttonContainer: {
-    paddingVertical: 3,
-    paddingHorizontal: 3,
+    paddingVertical: 4,
+    paddingHorizontal: 4,
     borderRadius: 10,
     backgroundColor: Colors.colorPrimaryLight,
   },
   buttonText: {
     color: Colors.black,
-    fontSize: 11,
-    paddingLeft: 3,
-    paddingRight: 3,
+    fontSize: 15,
+    paddingLeft: 6,
+    paddingRight: 6,
   },
 
   buttonContainerActive: {

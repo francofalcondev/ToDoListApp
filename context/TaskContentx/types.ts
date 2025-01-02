@@ -7,7 +7,15 @@ export interface Task {
   createdAt: Date;
   dueDate?: Date;
   priority: "low" | "medium" | "high";
-  category: "work" | "personal" | "wishlist" | "sport" | "no category";
+  category:
+    | "all"
+    | "personal"
+    | "finance"
+    | "fitness"
+    | "shopping"
+    | "family"
+    | "study"
+    | "work";
   archived: boolean;
   completed: boolean;
 }
@@ -16,7 +24,15 @@ export interface TaskContextType {
   tasks: Task[];
   addTask: (
     title: string,
-    category: "work" | "personal" | "wishlist" | "sport" | "no category",
+    category:
+      | "all"
+      | "personal"
+      | "finance"
+      | "fitness"
+      | "shopping"
+      | "family"
+      | "study"
+      | "work",
     priority?: "low" | "medium" | "high",
     description?: string,
     dueDate?: Date,

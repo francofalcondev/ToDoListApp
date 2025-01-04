@@ -1,15 +1,20 @@
 import { Text, TouchableOpacity } from "react-native";
 import { ButtonTabProps } from "./types";
 import { styles } from "./styles";
+import { TaskCategory } from "@/context/TaskContentx/types";
 
-export const ButtonTab = ({ title, isSelected, onPress }: ButtonTabProps) => {
+export const ButtonTab = ({
+  title,
+  isSelected,
+  setFilterSelected,
+}: ButtonTabProps) => {
   return (
     <TouchableOpacity
       style={[
         styles.buttonContainer,
         isSelected && styles.buttonContainerActive,
       ]}
-      onPress={onPress}
+      onPress={() => setFilterSelected(title.toLowerCase() as TaskCategory)}
     >
       <Text style={[styles.buttonText, isSelected && styles.buttonTextActive]}>
         {title}

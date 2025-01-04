@@ -1,37 +1,34 @@
 import { createContext, useContext, useState } from "react";
-import { Task, TaskContextType, TaskProviderProps } from "./types";
+import {
+  Task,
+  TaskContextType,
+  TaskProviderProps,
+  TaskCategory,
+  Taskpriority,
+} from "./types";
 import { taskMock } from "@/api/mockData";
 
 const TaskContext = createContext<TaskContextType>({
   tasks: [],
+  filterSelected: "all",
+  filteredTask: [],
+  setFilterSelected: () => {},
   addTask: () => {},
   deleteTask: () => {},
 });
 
 export const TaskProvider = ({ children }: TaskProviderProps) => {
   const [tasks, setTasks] = useState<Task[]>(taskMock);
-  const [tasksFiltered, setTaskFiltered] = useState<
-    | "all"
-    | "personal"
-    | "finance"
-    | "fitness"
-    | "shopping"
-    | "family"
-    | "study"
-    | "work"
-  >("all");
+  const [filterSelected, setFilterSelected] = useState<TaskCategory>("all");
+
+  const filteredTask = tasks.filter((task) =>
+    filterSelected === "all" ? true : task.category === filterSelected,
+  );
+
   const addTask = (
     title: string,
-    category:
-      | "all"
-      | "personal"
-      | "finance"
-      | "fitness"
-      | "shopping"
-      | "family"
-      | "study"
-      | "work",
-    priority: "low" | "medium" | "high" = "low",
+    category: TaskCategory,
+    priority: Taskpriority,
     description: string = "",
     dueDate?: Date,
   ) => {
@@ -55,7 +52,16 @@ export const TaskProvider = ({ children }: TaskProviderProps) => {
   };
 
   return (
-    <TaskContext.Provider value={{ tasks, addTask, deleteTask }}>
+    <TaskContext.Provider
+      value={{
+        tasks,
+        addTask,
+        deleteTask,
+        filteredTask,
+        filterSelected,
+        setFilterSelected,
+      }}
+    >
       {children}
     </TaskContext.Provider>
   );

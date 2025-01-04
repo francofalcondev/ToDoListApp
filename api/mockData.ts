@@ -1,6 +1,6 @@
-import { ITask } from "@/interfaces";
+import { Task } from "@/context";
 
-export const taskMock: ITask[] = [
+export const taskMock: Task[] = [
   {
     id: (Date.now() + 1).toString(),
     title: "Buy groceries",
@@ -40,7 +40,7 @@ export const taskMock: ITask[] = [
     createdAt: new Date(),
     dueDate: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000), // Siete días a partir de hoy.
     priority: "low",
-    category: "wishlist",
+    category: "all",
     archived: false,
     completed: false,
   },
@@ -72,7 +72,7 @@ export const taskMock: ITask[] = [
     description: "Jog for 30 minutes in the park.",
     createdAt: new Date(),
     priority: "medium",
-    category: "sport",
+    category: "fitness",
     archived: false,
     completed: false,
   },
@@ -113,7 +113,7 @@ export const taskMock: ITask[] = [
     description: "Check offers and renew for 6 months.",
     createdAt: new Date(),
     priority: "medium",
-    category: "sport",
+    category: "finance",
     archived: false,
     completed: false,
   },
@@ -123,7 +123,7 @@ export const taskMock: ITask[] = [
     description: "Choose a classic movie and relax.",
     createdAt: new Date(),
     priority: "low",
-    category: "wishlist",
+    category: "finance",
     archived: false,
     completed: false,
   },

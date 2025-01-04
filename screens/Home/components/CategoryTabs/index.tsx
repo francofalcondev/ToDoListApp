@@ -1,37 +1,33 @@
 import { FlatList, View } from "react-native";
 import { ButtonTab } from "./components";
 import { styles } from "./styles";
-import { useState } from "react";
+import { useTaskContext } from "@/context";
 export const CategoryTabs = () => {
-  const [selectedCategoryTab, setSelectedCategoryTab] = useState<string>("1");
-  const tabs = [
-    { id: "1", title: "All" },
-    { id: "2", title: "Personal" },
-    { id: "3", title: "Finance" },
-    { id: "4", title: "Fitness" },
-    { id: "5", title: "Shopping" },
-    { id: "6", title: "Family" },
-    { id: "7", title: "Study" },
-    { id: "8", title: "Work" },
-  ];
-
-  const handleTabPress = (id: string) => {
-    setSelectedCategoryTab(id);
-  };
+  const { filterSelected, setFilterSelected } = useTaskContext();
+  const filters = [
+    "All",
+    "Personal",
+    "Finance",
+    "Fitness",
+    "Shopping",
+    "Family",
+    "Study",
+    "Work",
+  ] as const;
 
   return (
     <View>
       <FlatList
         showsHorizontalScrollIndicator={false}
-        data={tabs}
+        data={filters}
         renderItem={({ item }) => (
           <ButtonTab
-            title={item.title}
-            isSelected={item.id === selectedCategoryTab}
-            onPress={() => handleTabPress(item.id)}
+            title={item}
+            isSelected={item.toLowerCase() === filterSelected}
+            setFilterSelected={setFilterSelected}
           />
         )}
-        keyExtractor={(item) => item.id}
+        keyExtractor={(item) => item}
         horizontal
         ItemSeparatorComponent={() => (
           <View style={styles.CategoryTabseparator} />

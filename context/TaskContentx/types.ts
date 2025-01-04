@@ -6,34 +6,21 @@ export interface Task {
   description?: string;
   createdAt: Date;
   dueDate?: Date;
-  priority: "low" | "medium" | "high";
-  category:
-    | "all"
-    | "personal"
-    | "finance"
-    | "fitness"
-    | "shopping"
-    | "family"
-    | "study"
-    | "work";
+  priority: Taskpriority;
+  category: TaskCategory;
   archived: boolean;
   completed: boolean;
 }
 
 export interface TaskContextType {
   tasks: Task[];
+  filterSelected: TaskCategory;
+  filteredTask: Task[];
+  setFilterSelected: (filter: TaskCategory) => void;
   addTask: (
     title: string,
-    category:
-      | "all"
-      | "personal"
-      | "finance"
-      | "fitness"
-      | "shopping"
-      | "family"
-      | "study"
-      | "work",
-    priority?: "low" | "medium" | "high",
+    category: TaskCategory,
+    priority: Taskpriority,
     description?: string,
     dueDate?: Date,
   ) => void;
@@ -43,3 +30,15 @@ export interface TaskContextType {
 export interface TaskProviderProps {
   children: JSX.Element | ReactNode;
 }
+
+export type TaskCategory =
+  | "all"
+  | "personal"
+  | "finance"
+  | "fitness"
+  | "shopping"
+  | "family"
+  | "study"
+  | "work";
+
+export type Taskpriority = "low" | "medium" | "high";

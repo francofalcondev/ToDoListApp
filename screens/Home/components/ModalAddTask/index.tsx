@@ -11,6 +11,7 @@ import { styles } from "./styles";
 import { ModalAddTaskProps } from "./types";
 import { useEffect, useRef, useState } from "react";
 import { CheckCheck } from "lucide-react-native";
+import { CategorySelector, DueDatePicker } from "./components";
 
 const ModalAddTask = ({
   isModalAddTaskOpen,
@@ -79,6 +80,10 @@ const ModalAddTask = ({
             >
               <CheckCheck color="#ffff" />
             </TouchableOpacity>
+            <View style={styles.OptionSelectionView}>
+              <CategorySelector />
+              <DueDatePicker />
+            </View>
           </View>
         </View>
       </KeyboardAvoidingView>

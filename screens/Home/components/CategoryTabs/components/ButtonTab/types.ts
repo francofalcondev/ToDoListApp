@@ -1,5 +1,7 @@
+import { TaskCategory } from "@/context/TaskContentx/types";
+
 export interface ButtonTabProps {
   title: string;
   isSelected: boolean;
-  onPress: () => void;
+  setFilterSelected: (filter: TaskCategory) => void;
 }

@@ -55,7 +55,8 @@ export const styles = StyleSheet.create({
   },
 
   OptionSelectionView: {
-    backgroundColor: "red",
     padding: 10,
+    flexDirection: "row",
+    gap: 20,
   },
 });

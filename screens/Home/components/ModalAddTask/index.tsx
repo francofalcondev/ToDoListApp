@@ -24,6 +24,21 @@ const ModalAddTask = ({
 }: ModalAddTaskProps) => {
   const [isFocused, setIsFocused] = useState<boolean>(false);
   const [newTask, setNewTask] = useState("");
+  const [taskData, setTaskData] = useState<{
+    title: string;
+    category: string;
+    priority: string;
+    description: string;
+    dueDate: Date | undefined;
+  }>({
+    title: "",
+    category: "No category",
+    priority: "low",
+    description: "",
+    dueDate: undefined,
+  });
+
+  console.log(taskData);
   const textInputRef = useRef<any>(null);
   const isButtonEnabled: boolean = newTask.length > 2;
 
@@ -85,9 +100,9 @@ const ModalAddTask = ({
               <CheckCheck color="#ffff" />
             </TouchableOpacity>
             <View style={styles.OptionSelectionView}>
-              <CategorySelector />
-              <PrioritySelector />
-              <DueDatePicker />
+              <CategorySelector setTaskData={setTaskData} />
+              <PrioritySelector setTaskData={setTaskData} />
+              <DueDatePicker setTaskData={setTaskData} />
             </View>
           </View>
         </View>

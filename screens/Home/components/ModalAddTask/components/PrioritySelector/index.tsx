@@ -2,8 +2,9 @@ import { SetStateAction, useRef, useState } from "react";
 import { TouchableOpacity, Text, FlatList, View } from "react-native";
 import Popover from "react-native-popover-view";
 import { styles } from "./styles";
+import { PriotitySelectorProps } from "./types";
 
-export const PrioritySelector = () => {
+export const PrioritySelector = ({ setTaskData }: PriotitySelectorProps) => {
   const priority = [
     { id: "1", name: "High" },
     { id: "2", name: "Medium" },
@@ -16,6 +17,10 @@ export const PrioritySelector = () => {
     priority: SetStateAction<{ id: string; name: string }>,
   ) => {
     setSelectedPriority(priority);
+    setTaskData((prev) => ({
+      ...prev,
+      priority: priority.name,
+    }));
     if (popoverRef.current) {
       popoverRef.current.requestClose();
     }

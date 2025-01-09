@@ -1,16 +1,26 @@
 import { Colors } from "@/constants/Colors";
 import { CalendarCheck } from "lucide-react-native";
-import { useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { TouchableOpacity, Text, View } from "react-native";
 import { Calendar } from "react-native-calendars";
 import Popover, { PopoverPlacement } from "react-native-popover-view";
 import { styles } from "./styles";
+import { DueDatePickerProps } from "./types";
 
-export const DueDatePicker = () => {
+export const DueDatePicker = ({ setTaskData }: DueDatePickerProps) => {
   const today = new Date().toISOString().split("T")[0];
   const [calendarDueDate, setCalendarDueDate] = useState<string | undefined>(
     today,
   );
+
+  useEffect(() => {
+    const dataObj = calendarDueDate ? new Date(calendarDueDate) : undefined;
+    setTaskData((prev) => ({
+      ...prev,
+      dueDate: dataObj,
+    }));
+  }, [calendarDueDate, setTaskData]);
+
   const popoverRef = useRef<Popover>(null);
   const dateOptions = [
     { label: "No date", value: undefined },

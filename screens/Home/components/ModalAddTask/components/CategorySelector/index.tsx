@@ -2,7 +2,9 @@ import { FlatList, View, Text, TouchableOpacity } from "react-native";
 import Popover from "react-native-popover-view";
 import { styles } from "./styles";
 import { SetStateAction, useRef, useState } from "react";
-export const CategorySelector = () => {
+import { CategorySelectorProps } from "./types";
+
+export const CategorySelector = ({ setTaskData }: CategorySelectorProps) => {
   const categories = [
     { id: "1", name: "No Category" },
     { id: "2", name: "Personal" },
@@ -20,6 +22,10 @@ export const CategorySelector = () => {
     category: SetStateAction<{ id: string; name: string }>,
   ) => {
     setSelectedCategory(category);
+    setTaskData((prev) => ({
+      ...prev,
+      category: category.name,
+    }));
     if (popoverRef.current) {
       popoverRef.current.requestClose();
     }

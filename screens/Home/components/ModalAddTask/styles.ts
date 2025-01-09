@@ -53,4 +53,10 @@ export const styles = StyleSheet.create({
   buttonAddTaskEnabled: {
     backgroundColor: "#007AFF",
   },
+
+  OptionSelectionView: {
+    padding: 10,
+    flexDirection: "row",
+    gap: 20,
+  },
 });

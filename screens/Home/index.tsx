@@ -1,17 +1,23 @@
 import React, { useState } from "react";
 import { View, Text } from "react-native";
-import { FloatingButtonAdd, ModalAddTask, TaskList } from "./components";
+import {
+  CategoryTabs,
+  FloatingButtonAdd,
+  ModalAddTask,
+  TaskList,
+} from "./components";
 import { styles } from "./styles";
 import { useTaskContext } from "@/context";
 
 const Home = () => {
   const [isModalAddTaskOpen, setIsModalAddTaskOpen] = useState<boolean>(false);
-  const { tasks, addTask } = useTaskContext();
+  const { filteredTask, addTask } = useTaskContext();
 
   return (
     <View style={styles.container}>
-      <Text style={styles.titleHome}>Todo List</Text>
-      <TaskList task={tasks} />
+      <CategoryTabs />
+      <Text style={styles.titleHome}>Today</Text>
+      <TaskList task={filteredTask} />
       <FloatingButtonAdd
         onPress={() => setIsModalAddTaskOpen((prev) => !prev)}
       />

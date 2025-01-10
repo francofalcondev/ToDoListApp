@@ -32,7 +32,7 @@ export interface TaskProviderProps {
 }
 
 export type TaskCategory =
-  | "all"
+  | "No category"
   | "personal"
   | "finance"
   | "fitness"

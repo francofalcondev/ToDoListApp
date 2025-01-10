@@ -23,7 +23,6 @@ const ModalAddTask = ({
   addTask,
 }: ModalAddTaskProps) => {
   const [isFocused, setIsFocused] = useState<boolean>(false);
-  const [newTask, setNewTask] = useState("");
   const [taskData, setTaskData] = useState<{
     title: string;
     category: string;
@@ -38,9 +37,8 @@ const ModalAddTask = ({
     dueDate: undefined,
   });
 
-  console.log(taskData);
   const textInputRef = useRef<any>(null);
-  const isButtonEnabled: boolean = newTask.length > 2;
+  const isButtonEnabled: boolean = taskData.title.length > 2;
 
   const onModalShow = () => {
     if (textInputRef.current) {
@@ -48,13 +46,16 @@ const ModalAddTask = ({
     }
   };
 
-  const handleAddTaskInput = (title: string) => {
+  const handleOnSubmitData = () => {
     if (!isButtonEnabled) return;
-    if (newTask.trim().length > 3) {
-      addTask(newTask);
-      setNewTask("");
-      setIsModalAddTaskOpen(false);
-    }
+    addTask(taskData);
+  };
+
+  const handleOnChangeInput = (title: string) => {
+    setTaskData((prev) => ({
+      ...prev,
+      title: title,
+    }));
   };
 
   useEffect(() => {
@@ -85,7 +86,7 @@ const ModalAddTask = ({
               ref={textInputRef}
               onFocus={() => setIsFocused(true)}
               onBlur={() => setIsFocused(false)}
-              onChangeText={setNewTask}
+              onChangeText={handleOnChangeInput}
               autoFocus={true}
               placeholder="Input new task here"
             />
@@ -95,7 +96,6 @@ const ModalAddTask = ({
                 styles.buttonAddTask,
                 isButtonEnabled && styles.buttonAddTaskEnabled,
               ]}
-              onPress={() => handleAddTaskInput(newTask)}
             >
               <CheckCheck color="#ffff" />
             </TouchableOpacity>

@@ -3,7 +3,6 @@ import { ReactNode } from "react";
 export interface Task {
   id: string;
   title: string;
-  description?: string;
   createdAt: Date;
   dueDate?: Date;
   priority: Taskpriority;
@@ -21,7 +20,6 @@ export interface TaskContextType {
     title: string,
     category: TaskCategory,
     priority: Taskpriority,
-    description?: string,
     dueDate?: Date,
   ) => void;
   deleteTask: (id: string) => void;
@@ -32,13 +30,13 @@ export interface TaskProviderProps {
 }
 
 export type TaskCategory =
-  | "all"
-  | "personal"
-  | "finance"
-  | "fitness"
-  | "shopping"
-  | "family"
-  | "study"
-  | "work";
+  | "No category"
+  | "Personal"
+  | "Finance"
+  | "Fitness"
+  | "Shopping"
+  | "Family"
+  | "Study"
+  | "Work";
 
-export type Taskpriority = "low" | "medium" | "high";
+export type Taskpriority = "Low" | "Medium" | "High";

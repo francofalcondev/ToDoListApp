@@ -10,7 +10,7 @@ import { taskMock } from "@/api/mockData";
 
 const TaskContext = createContext<TaskContextType>({
   tasks: [],
-  filterSelected: "all",
+  filterSelected: "No category",
   filteredTask: [],
   setFilterSelected: () => {},
   addTask: () => {},
@@ -19,17 +19,21 @@ const TaskContext = createContext<TaskContextType>({
 
 export const TaskProvider = ({ children }: TaskProviderProps) => {
   const [tasks, setTasks] = useState<Task[]>(taskMock);
-  const [filterSelected, setFilterSelected] = useState<TaskCategory>("all");
+  const [filterSelected, setFilterSelected] =
+    useState<TaskCategory>("No category");
 
   const filteredTask = tasks.filter((task) =>
-    filterSelected === "all" ? true : task.category === filterSelected,
+    filterSelected === "No category" ? true : task.category === filterSelected,
   );
+
+  console.log(filterSelected);
+  console.log(tasks);
+  console.log(filteredTask);
 
   const addTask = (
     title: string,
     category: TaskCategory,
     priority: Taskpriority,
-    description: string = "",
     dueDate?: Date,
   ) => {
     const newTask: Task = {
@@ -37,7 +41,6 @@ export const TaskProvider = ({ children }: TaskProviderProps) => {
       title,
       category,
       priority,
-      description,
       completed: false,
       createdAt: new Date(),
       dueDate: dueDate || undefined,

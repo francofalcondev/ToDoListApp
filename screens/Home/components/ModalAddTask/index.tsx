@@ -16,6 +16,7 @@ import {
   DueDatePicker,
   PrioritySelector,
 } from "./components";
+import { TaskCategory, Taskpriority } from "@/context/TaskContentx/types";
 
 const ModalAddTask = ({
   isModalAddTaskOpen,
@@ -23,24 +24,20 @@ const ModalAddTask = ({
   addTask,
 }: ModalAddTaskProps) => {
   const [isFocused, setIsFocused] = useState<boolean>(false);
-  const [newTask, setNewTask] = useState("");
   const [taskData, setTaskData] = useState<{
     title: string;
-    category: string;
-    priority: string;
-    description: string;
+    category: TaskCategory;
+    priority: Taskpriority;
     dueDate: Date | undefined;
   }>({
     title: "",
     category: "No category",
-    priority: "low",
-    description: "",
+    priority: "Low",
     dueDate: undefined,
   });
 
-  console.log(taskData);
   const textInputRef = useRef<any>(null);
-  const isButtonEnabled: boolean = newTask.length > 2;
+  const isButtonEnabled: boolean = taskData.title.length > 2;
 
   const onModalShow = () => {
     if (textInputRef.current) {
@@ -48,13 +45,18 @@ const ModalAddTask = ({
     }
   };
 
-  const handleAddTaskInput = (title: string) => {
+  const handleOnSubmitData = () => {
+    const { category, title, dueDate, priority } = taskData;
     if (!isButtonEnabled) return;
-    if (newTask.trim().length > 3) {
-      addTask(newTask);
-      setNewTask("");
-      setIsModalAddTaskOpen(false);
-    }
+    addTask(title, category, priority, dueDate);
+    setIsModalAddTaskOpen(false);
+  };
+
+  const handleOnChangeInput = (title: string) => {
+    setTaskData((prev) => ({
+      ...prev,
+      title: title,
+    }));
   };
 
   useEffect(() => {
@@ -85,7 +87,7 @@ const ModalAddTask = ({
               ref={textInputRef}
               onFocus={() => setIsFocused(true)}
               onBlur={() => setIsFocused(false)}
-              onChangeText={setNewTask}
+              onChangeText={handleOnChangeInput}
               autoFocus={true}
               placeholder="Input new task here"
             />
@@ -95,7 +97,7 @@ const ModalAddTask = ({
                 styles.buttonAddTask,
                 isButtonEnabled && styles.buttonAddTaskEnabled,
               ]}
-              onPress={() => handleAddTaskInput(newTask)}
+              onPress={handleOnSubmitData}
             >
               <CheckCheck color="#ffff" />
             </TouchableOpacity>

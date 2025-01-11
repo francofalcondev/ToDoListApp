@@ -42,9 +42,24 @@ export const TaskItem = ({ task }: TaskItemProps) => {
           text={task.title}
           textStyle={{ color: "black", fontSize: 20 }}
         />
-        <View style={styles.containerTaskItemDate}>
-          <LucideCalendarDays color="gray" size={20} />
-          <Text style={styles.textDate}>{formatDate(task.createdAt)}</Text>
+
+        <View style={styles.containerTaskInfo}>
+          <View style={styles.containerTaskDate}>
+            <LucideCalendarDays color="gray" size={20} />
+            <Text style={styles.textDate}>{formatDate(task.createdAt)}</Text>
+            <Text>
+              {" "}
+              {task.dueDate ? `Due date: ${formatDate(task.dueDate)}` : ""}
+            </Text>
+          </View>
+          <View style={styles.containerCategoryPriority}>
+            <Text style={styles.textPriority}>{task.priority}</Text>
+            <Text style={styles.textCategory}>
+              {(task.category as string) === "No category"
+                ? undefined
+                : task.category}
+            </Text>
+          </View>
         </View>
       </Pressable>
     </View>

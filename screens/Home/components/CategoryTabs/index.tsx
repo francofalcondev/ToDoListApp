@@ -2,18 +2,16 @@ import { FlatList, View } from "react-native";
 import { ButtonTab } from "./components";
 import { styles } from "./styles";
 import { useTaskContext } from "@/context";
+import { filters } from "@/data/filtersTab";
+import { TaskCategory } from "@/context/TaskContentx/types";
+
 export const CategoryTabs = () => {
   const { filterSelected, setFilterSelected } = useTaskContext();
-  const filters = [
-    "All",
-    "Personal",
-    "Finance",
-    "Fitness",
-    "Shopping",
-    "Family",
-    "Study",
-    "Work",
-  ] as const;
+
+  const handleSetFilter = (filter: string) => {
+    const transformedFilter = filter === "All" ? "No category" : filter;
+    setFilterSelected(transformedFilter as TaskCategory);
+  };
 
   return (
     <View>
@@ -23,8 +21,8 @@ export const CategoryTabs = () => {
         renderItem={({ item }) => (
           <ButtonTab
             title={item}
-            isSelected={item.toLowerCase() === filterSelected}
-            setFilterSelected={setFilterSelected}
+            isSelected={item === filterSelected}
+            setFilterSelected={handleSetFilter}
           />
         )}
         keyExtractor={(item) => item}

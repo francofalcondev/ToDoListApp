@@ -16,6 +16,7 @@ import {
   DueDatePicker,
   PrioritySelector,
 } from "./components";
+import { TaskCategory, Taskpriority } from "@/context/TaskContentx/types";
 
 const ModalAddTask = ({
   isModalAddTaskOpen,
@@ -25,15 +26,13 @@ const ModalAddTask = ({
   const [isFocused, setIsFocused] = useState<boolean>(false);
   const [taskData, setTaskData] = useState<{
     title: string;
-    category: string;
-    priority: string;
-    description: string;
+    category: TaskCategory;
+    priority: Taskpriority;
     dueDate: Date | undefined;
   }>({
     title: "",
     category: "No category",
-    priority: "low",
-    description: "",
+    priority: "Low",
     dueDate: undefined,
   });
 
@@ -47,8 +46,10 @@ const ModalAddTask = ({
   };
 
   const handleOnSubmitData = () => {
+    const { category, title, dueDate, priority } = taskData;
     if (!isButtonEnabled) return;
-    addTask(taskData);
+    addTask(title, category, priority, dueDate);
+    setIsModalAddTaskOpen(false);
   };
 
   const handleOnChangeInput = (title: string) => {
@@ -96,6 +97,7 @@ const ModalAddTask = ({
                 styles.buttonAddTask,
                 isButtonEnabled && styles.buttonAddTaskEnabled,
               ]}
+              onPress={handleOnSubmitData}
             >
               <CheckCheck color="#ffff" />
             </TouchableOpacity>

@@ -14,7 +14,7 @@ export const ButtonTab = ({
         styles.buttonContainer,
         isSelected && styles.buttonContainerActive,
       ]}
-      onPress={() => setFilterSelected(title.toLowerCase() as TaskCategory)}
+      onPress={() => setFilterSelected(title as TaskCategory)}
     >
       <Text style={[styles.buttonText, isSelected && styles.buttonTextActive]}>
         {title}

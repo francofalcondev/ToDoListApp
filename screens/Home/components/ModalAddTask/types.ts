@@ -8,7 +8,6 @@ export interface ModalAddTaskProps {
     title: string,
     category: TaskCategory,
     priority: Taskpriority,
-    description?: string,
     dueDate?: Date,
   ) => void;
 }

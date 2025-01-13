@@ -20,9 +20,8 @@ export const DueDatePicker = ({ setTaskData }: DueDatePickerProps) => {
     let dataObj: Date | undefined;
 
     if (calendarDueDate) {
-      // Crear una nueva fecha asegurando que esté en la zona horaria local
       dataObj = new Date(calendarDueDate + "T00:00:00");
-      // Asegurar que la fecha está al inicio del día
+
       dataObj.setHours(0, 0, 0, 0);
     }
 
@@ -94,7 +93,7 @@ export const DueDatePicker = ({ setTaskData }: DueDatePickerProps) => {
         }}
         theme={{
           backgroundColor: "#f4f4f4",
-          calendarBackground: "#f4f4f4",
+          calendarBackground: "#ffffff",
           textSectionTitleColor: Colors.colorPrimaryBlue,
           selectedDayBackgroundColor: Colors.colorPrimaryBlue,
           selectedDayTextColor: "#ffffff",

@@ -26,10 +26,6 @@ export const TaskProvider = ({ children }: TaskProviderProps) => {
     filterSelected === "No category" ? true : task.category === filterSelected,
   );
 
-  console.log(filterSelected);
-  console.log(tasks);
-  console.log(filteredTask);
-
   const addTask = (
     title: string,
     category: TaskCategory,

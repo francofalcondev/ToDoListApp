@@ -1,6 +1,6 @@
 import { Colors } from "@/constants/Colors";
 import { CalendarCheck } from "lucide-react-native";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { TouchableOpacity, Text, View } from "react-native";
 import { Calendar } from "react-native-calendars";
 import Popover, { PopoverPlacement } from "react-native-popover-view";
@@ -8,13 +8,23 @@ import { styles } from "./styles";
 import { DueDatePickerProps } from "./types";
 
 export const DueDatePicker = ({ setTaskData }: DueDatePickerProps) => {
-  const today = new Date().toISOString().split("T")[0];
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+  const todayISO = today.toISOString().split("T")[0];
+
   const [calendarDueDate, setCalendarDueDate] = useState<string | undefined>(
-    today,
+    todayISO,
   );
 
   useEffect(() => {
-    const dataObj = calendarDueDate ? new Date(calendarDueDate) : undefined;
+    let dataObj: Date | undefined;
+
+    if (calendarDueDate) {
+      dataObj = new Date(calendarDueDate + "T00:00:00");
+
+      dataObj.setHours(0, 0, 0, 0);
+    }
+
     setTaskData((prev) => ({
       ...prev,
       dueDate: dataObj,
@@ -24,23 +34,31 @@ export const DueDatePicker = ({ setTaskData }: DueDatePickerProps) => {
   const popoverRef = useRef<Popover>(null);
   const dateOptions = [
     { label: "No date", value: undefined },
-    { label: "Today", value: today },
+    { label: "Today", value: todayISO },
     {
       label: "Tomorrow",
-      value: new Date(new Date().setDate(new Date().getDate() + 1))
+      value: new Date(
+        today.getFullYear(),
+        today.getMonth(),
+        today.getDate() + 1,
+      )
         .toISOString()
         .split("T")[0],
     },
     {
       label: "3 Days Later",
-      value: new Date(new Date().setDate(new Date().getDate() + 3))
+      value: new Date(
+        today.getFullYear(),
+        today.getMonth(),
+        today.getDate() + 3,
+      )
         .toISOString()
         .split("T")[0],
     },
     {
       label: "This Sunday",
       value: (() => {
-        const date = new Date();
+        const date = new Date(today);
         const sunday = new Date(
           date.setDate(date.getDate() + ((7 - date.getDay()) % 7)),
         );
@@ -75,7 +93,7 @@ export const DueDatePicker = ({ setTaskData }: DueDatePickerProps) => {
         }}
         theme={{
           backgroundColor: "#f4f4f4",
-          calendarBackground: "#f4f4f4",
+          calendarBackground: "#ffffff",
           textSectionTitleColor: Colors.colorPrimaryBlue,
           selectedDayBackgroundColor: Colors.colorPrimaryBlue,
           selectedDayTextColor: "#ffffff",

@@ -13,6 +13,13 @@ export const CategoryTabs = () => {
     setFilterSelected(transformedFilter as TaskCategory);
   };
 
+  const isSelected = (item: string) => {
+    if (item === "All") {
+      return filterSelected === "No category";
+    }
+    return item === filterSelected;
+  };
+
   return (
     <View>
       <FlatList
@@ -21,7 +28,7 @@ export const CategoryTabs = () => {
         renderItem={({ item }) => (
           <ButtonTab
             title={item}
-            isSelected={item === filterSelected}
+            isSelected={isSelected(item)}
             setFilterSelected={handleSetFilter}
           />
         )}

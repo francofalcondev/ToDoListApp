@@ -4,7 +4,9 @@ import { TaskItemProps } from "./types";
 import { styles } from "./styles";
 import { LucideCalendarDays } from "lucide-react-native";
 import { formatDate } from "./utils/formattedDate";
+
 import { useTaskContext } from "@/context";
+import { formatToMMDD } from "./utils/formatToMMDD";
 
 export const TaskItem = ({ task }: TaskItemProps) => {
   const { deleteTask } = useTaskContext();
@@ -46,10 +48,12 @@ export const TaskItem = ({ task }: TaskItemProps) => {
         <View style={styles.containerTaskInfo}>
           <View style={styles.containerTaskDate}>
             <LucideCalendarDays color="gray" size={20} />
-            <Text style={styles.textDate}>{formatDate(task.createdAt)}</Text>
+            <Text style={styles.textDate}>{formatToMMDD(task.createdAt)}</Text>
             <Text>
               {" "}
-              {task.dueDate ? `Due date: ${formatDate(task.dueDate)}` : ""}
+              {formatDate(task.dueDate)
+                ? `Due date: ${formatDate(task.dueDate)}`
+                : ""}
             </Text>
           </View>
           <View style={styles.containerCategoryPriority}>

@@ -49,6 +49,7 @@ export const styles = StyleSheet.create({
     shadowOffset: { width: 1, height: 3 },
     shadowOpacity: 0.2,
     shadowRadius: 3.56,
+    zIndex: 9999,
   },
   buttonAddTaskEnabled: {
     backgroundColor: "#007AFF",

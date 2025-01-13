@@ -1,5 +1,5 @@
 import { TaskCategory, Taskpriority } from "@/context/TaskContentx/types";
-export interface CategorySelectorProps {
+export interface DueDatePickerProps {
   setTaskData: React.Dispatch<
     React.SetStateAction<{
       title: string;

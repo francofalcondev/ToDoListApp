@@ -29,7 +29,7 @@ export const taskMock: Task[] = [
     priority: "Low",
     category: "Work",
     archived: false,
-    completed: true,
+    completed: false,
   },
   {
     id: "f232d4de-8c0e-45e2-91da-c5317a1ff8e8",
@@ -49,7 +49,7 @@ export const taskMock: Task[] = [
     priority: "High",
     category: "Shopping",
     archived: false,
-    completed: true,
+    completed: false,
   },
   {
     id: "ba8318d5-68de-44a6-82f6-84ff2d36efc2",
@@ -69,7 +69,7 @@ export const taskMock: Task[] = [
     priority: "Low",
     category: "Fitness",
     archived: false,
-    completed: true,
+    completed: false,
   },
   {
     id: "69cc8b0d-60e1-4ec7-a416-c22ae6dfd6e0",
@@ -89,7 +89,7 @@ export const taskMock: Task[] = [
     priority: "Medium",
     category: "Finance",
     archived: false,
-    completed: true,
+    completed: false,
   },
   {
     id: "874b3e07-c128-4a89-a26c-1056e83af0e3",

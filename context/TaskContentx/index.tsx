@@ -1,4 +1,6 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+
 import {
   Task,
   TaskContextType,
@@ -6,7 +8,6 @@ import {
   TaskCategory,
   Taskpriority,
 } from "./types";
-import { taskMock } from "@/api/mockData";
 
 const TaskContext = createContext<TaskContextType>({
   tasks: [],
@@ -17,10 +18,39 @@ const TaskContext = createContext<TaskContextType>({
   deleteTask: () => {},
 });
 
+const STORAGE_KEY = "@tasks";
+
 export const TaskProvider = ({ children }: TaskProviderProps) => {
-  const [tasks, setTasks] = useState<Task[]>(taskMock);
+  const [tasks, setTasks] = useState<Task[]>([]);
   const [filterSelected, setFilterSelected] =
     useState<TaskCategory>("No category");
+
+  useEffect(() => {
+    const loadTask = async () => {
+      try {
+        const storedTasks = await AsyncStorage.getItem(STORAGE_KEY);
+        if (storedTasks) {
+          setTasks(JSON.parse(storedTasks));
+        }
+      } catch (error) {
+        console.error("Failed to load tasks from storage", error);
+      }
+    };
+
+    loadTask();
+  }, []);
+
+  useEffect(() => {
+    const saveTasks = async () => {
+      try {
+        await AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(tasks));
+      } catch (error) {
+        console.error("Failed to load tasks from storage", error);
+      }
+    };
+
+    saveTasks();
+  }, [tasks]);
 
   const filteredTask = tasks.filter((task) =>
     filterSelected === "No category" ? true : task.category === filterSelected,

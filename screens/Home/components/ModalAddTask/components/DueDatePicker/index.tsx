@@ -6,19 +6,10 @@ import { Calendar } from "react-native-calendars";
 import Popover, { PopoverPlacement } from "react-native-popover-view";
 import { styles } from "./styles";
 import { DueDatePickerProps } from "./types";
-import {
-  format,
-  isToday,
-  isTomorrow,
-  addDays,
-  endOfWeek,
-  parseISO,
-  startOfDay,
-} from "date-fns";
+import { format, addDays, endOfWeek, parseISO, startOfDay } from "date-fns";
 
 export const DueDatePicker = ({ setTaskData }: DueDatePickerProps) => {
   const today = startOfDay(new Date());
-  today.setHours(0, 0, 0, 0);
   const todayISO = format(today, "yyyy-MM-dd");
 
   const [calendarDueDate, setCalendarDueDate] = useState<string | undefined>(

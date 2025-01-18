@@ -6,24 +6,18 @@ import { Calendar } from "react-native-calendars";
 import Popover, { PopoverPlacement } from "react-native-popover-view";
 import { styles } from "./styles";
 import { DueDatePickerProps } from "./types";
+import { format, addDays, endOfWeek, parseISO, startOfDay } from "date-fns";
 
 export const DueDatePicker = ({ setTaskData }: DueDatePickerProps) => {
-  const today = new Date();
-  today.setHours(0, 0, 0, 0);
-  const todayISO = today.toISOString().split("T")[0];
+  const today = startOfDay(new Date());
+  const todayISO = format(today, "yyyy-MM-dd");
 
   const [calendarDueDate, setCalendarDueDate] = useState<string | undefined>(
     todayISO,
   );
 
   useEffect(() => {
-    let dataObj: Date | undefined;
-
-    if (calendarDueDate) {
-      dataObj = new Date(calendarDueDate + "T00:00:00");
-
-      dataObj.setHours(0, 0, 0, 0);
-    }
+    const dataObj = calendarDueDate ? parseISO(calendarDueDate) : undefined;
 
     setTaskData((prev) => ({
       ...prev,
@@ -37,33 +31,15 @@ export const DueDatePicker = ({ setTaskData }: DueDatePickerProps) => {
     { label: "Today", value: todayISO },
     {
       label: "Tomorrow",
-      value: new Date(
-        today.getFullYear(),
-        today.getMonth(),
-        today.getDate() + 1,
-      )
-        .toISOString()
-        .split("T")[0],
+      value: format(addDays(today, 1), "yyyy-mm-dd"),
     },
     {
       label: "3 Days Later",
-      value: new Date(
-        today.getFullYear(),
-        today.getMonth(),
-        today.getDate() + 3,
-      )
-        .toISOString()
-        .split("T")[0],
+      value: format(addDays(today, 3), "yyyy-MM-dd"),
     },
     {
       label: "This Sunday",
-      value: (() => {
-        const date = new Date(today);
-        const sunday = new Date(
-          date.setDate(date.getDate() + ((7 - date.getDay()) % 7)),
-        );
-        return sunday.toISOString().split("T")[0];
-      })(),
+      value: format(endOfWeek(today), "yyyy-MM-dd"),
     },
   ];
 
@@ -83,7 +59,7 @@ export const DueDatePicker = ({ setTaskData }: DueDatePickerProps) => {
         onDayPress={(day: { dateString: string }) => {
           setCalendarDueDate(day.dateString);
         }}
-        minDate={today}
+        minDate={format(today, "yyyy-MM-dd")}
         markedDates={{
           [calendarDueDate || ""]: {
             selected: true,

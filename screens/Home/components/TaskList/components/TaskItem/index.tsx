@@ -3,10 +3,9 @@ import BouncyCheckbox from "react-native-bouncy-checkbox";
 import { TaskItemProps } from "./types";
 import { styles } from "./styles";
 import { LucideCalendarDays } from "lucide-react-native";
-import { formatDate } from "./utils/formattedDate";
-
 import { useTaskContext } from "@/context";
 import { formatToMMDD } from "./utils/formatToMMDD";
+import { format, isToday, parseISO } from "date-fns";
 
 export const TaskItem = ({ task }: TaskItemProps) => {
   const { deleteTask } = useTaskContext();
@@ -25,6 +24,12 @@ export const TaskItem = ({ task }: TaskItemProps) => {
         },
       },
     ]);
+  };
+
+  const formatDueDate = (dueDate: Date | undefined) => {
+    if (!dueDate) return ""; // Si no hay fecha, no muestra nada
+    if (isToday(dueDate)) return "Today"; // Verifica si es hoy
+    return format(dueDate, "MM/dd/yyyy"); // Formatea la fecha si no es hoy
   };
 
   return (
@@ -48,12 +53,12 @@ export const TaskItem = ({ task }: TaskItemProps) => {
         <View style={styles.containerTaskInfo}>
           <View style={styles.containerTaskDate}>
             <LucideCalendarDays color="gray" size={20} />
-            <Text style={styles.textDate}>{formatToMMDD(task.createdAt)}</Text>
+            <Text style={styles.textDate}>
+              {format(task.createdAt, "MM/dd/yyyy")}
+            </Text>
             <Text>
               {" "}
-              {formatDate(task.dueDate)
-                ? `Due date: ${formatDate(task.dueDate)}`
-                : ""}
+              {task.dueDate ? `Due date: ${formatDueDate(task.dueDate)}` : ""}
             </Text>
           </View>
           <View style={styles.containerCategoryPriority}>

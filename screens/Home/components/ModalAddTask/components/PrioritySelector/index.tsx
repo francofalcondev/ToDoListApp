@@ -11,15 +11,16 @@ export const PrioritySelector = ({ setTaskData }: PriotitySelectorProps) => {
     { id: "3", name: "Low" },
   ];
 
-  const [selectedPriority, setSelectedPriority] = useState(priority[0]);
+  const [selectedPriority, setSelectedPriority] = useState(priority[1]);
   const popoverRef = useRef<Popover>(null);
   const handlePrioritySelect = (
     priority: SetStateAction<{ id: string; name: string }>,
   ) => {
     setSelectedPriority(priority);
+    const { priorityName } = priority.name;
     setTaskData((prev) => ({
       ...prev,
-      priority: priority.name,
+      priority: priorityName,
     }));
     if (popoverRef.current) {
       popoverRef.current.requestClose();

@@ -16,7 +16,7 @@ const Home = () => {
   return (
     <View style={styles.container}>
       <CategoryTabs />
-      <Text style={styles.titleHome}>Today</Text>
+      <Text style={styles.titleHome}>Task Board</Text>
       <TaskList task={filteredTask} />
       <FloatingButtonAdd
         onPress={() => setIsModalAddTaskOpen((prev) => !prev)}

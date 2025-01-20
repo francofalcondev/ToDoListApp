@@ -24,17 +24,19 @@ const ModalAddTask = ({
   addTask,
 }: ModalAddTaskProps) => {
   const [isFocused, setIsFocused] = useState<boolean>(false);
+
+  const initialTaskData = {
+    title: "",
+    category: "No category" as TaskCategory,
+    priority: "Medium" as Taskpriority,
+    dueDate: undefined as Date | undefined,
+  };
   const [taskData, setTaskData] = useState<{
     title: string;
     category: TaskCategory;
     priority: Taskpriority;
     dueDate: Date | undefined;
-  }>({
-    title: "",
-    category: "No category",
-    priority: "Low",
-    dueDate: undefined,
-  });
+  }>(initialTaskData);
 
   const textInputRef = useRef<any>(null);
   const isButtonEnabled: boolean = taskData.title.length > 2;
@@ -49,6 +51,7 @@ const ModalAddTask = ({
     const { category, title, dueDate, priority } = taskData;
     if (!isButtonEnabled) return;
     addTask(title, category, priority, dueDate);
+    setTaskData(initialTaskData);
     setIsModalAddTaskOpen(false);
   };
 

@@ -1,5 +1,5 @@
 import { TaskCategory, Taskpriority } from "@/context/TaskContentx/types";
-export interface CategorySelectorProps {
+export interface PriotitySelectorProps {
   setTaskData: React.Dispatch<
     React.SetStateAction<{
       title: string;

@@ -26,12 +26,13 @@ export const DueDatePicker = ({ setTaskData }: DueDatePickerProps) => {
   }, [calendarDueDate, setTaskData]);
 
   const popoverRef = useRef<Popover>(null);
+
   const dateOptions = [
     { label: "No date", value: undefined },
     { label: "Today", value: todayISO },
     {
       label: "Tomorrow",
-      value: format(addDays(today, 1), "yyyy-mm-dd"),
+      value: format(addDays(today, 1), "yyyy-MM-dd"),
     },
     {
       label: "3 Days Later",
@@ -42,6 +43,8 @@ export const DueDatePicker = ({ setTaskData }: DueDatePickerProps) => {
       value: format(endOfWeek(today), "yyyy-MM-dd"),
     },
   ];
+
+  console.log(calendarDueDate);
 
   return (
     <Popover

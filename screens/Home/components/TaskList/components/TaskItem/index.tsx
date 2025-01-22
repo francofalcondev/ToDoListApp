@@ -25,6 +25,8 @@ export const TaskItem = ({ task }: TaskItemProps) => {
     ]);
   };
 
+  console.log(task.priority);
+
   const formatDueDate = (dueDate: Date | undefined) => {
     if (!dueDate) return "";
     if (isToday(dueDate)) return "Today";

@@ -1,26 +1,26 @@
-import { SetStateAction, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { TouchableOpacity, Text, FlatList, View } from "react-native";
 import Popover from "react-native-popover-view";
 import { styles } from "./styles";
 import { PriotitySelectorProps } from "./types";
-
+import { Taskpriority } from "@/context/TaskContentx/types";
 export const PrioritySelector = ({ setTaskData }: PriotitySelectorProps) => {
-  const priority = [
+  const prioritys: { id: string; name: Taskpriority }[] = [
     { id: "1", name: "High" },
     { id: "2", name: "Medium" },
     { id: "3", name: "Low" },
   ];
+  const [selectedPriority, setSelectedPriority] = useState(prioritys[1]);
 
-  const [selectedPriority, setSelectedPriority] = useState(priority[1]);
   const popoverRef = useRef<Popover>(null);
-  const handlePrioritySelect = (
-    priority: SetStateAction<{ id: string; name: string }>,
-  ) => {
-    setSelectedPriority(priority);
-    const { priorityName } = priority.name;
+  const handlePrioritySelect = (selected: {
+    id: string;
+    name: Taskpriority;
+  }) => {
+    setSelectedPriority(selected);
     setTaskData((prev) => ({
       ...prev,
-      priority: priorityName,
+      priority: selected.name,
     }));
     if (popoverRef.current) {
       popoverRef.current.requestClose();
@@ -39,14 +39,15 @@ export const PrioritySelector = ({ setTaskData }: PriotitySelectorProps) => {
       }
     >
       <FlatList
-        data={priority}
+        data={prioritys}
         ItemSeparatorComponent={() => <View style={styles.separator} />}
         renderItem={({ item }) => (
           <TouchableOpacity onPress={() => handlePrioritySelect(item)}>
             <Text
-              style={
-                selectedPriority.id === item.id && styles.textPriorityActive
-              }
+              style={[
+                styles.textPriority,
+                selectedPriority.id === item.id && styles.textPriorityActive,
+              ]}
             >
               {item.name}
             </Text>

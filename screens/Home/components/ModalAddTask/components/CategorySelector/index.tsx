@@ -47,9 +47,10 @@ export const CategorySelector = ({ setTaskData }: CategorySelectorProps) => {
             }
           >
             <Text
-              style={
-                selectedCategory.id === item.id && styles.textCategoryActive
-              }
+              style={[
+                styles.textCategory,
+                selectedCategory.id === item.id && styles.textCategoryActive,
+              ]}
             >
               {item.name}
             </Text>
